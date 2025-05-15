@@ -102,7 +102,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         ).toISOString().split("T")[0], // Calculate return date
       };
 
-      await axios.post("https://military-leave-catalog-backend-production.up.railway.app/api/personnel", newEntry, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/personnel`, newEntry, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
