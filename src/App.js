@@ -25,7 +25,7 @@ export default function MilitaryLeaveCatalog() {
 
   const fetchPersonnel = async () => {
     try {
-      const res = await axios.get("http://military-leave-catalog-backend-production.up.railway.app/api/personnel", {
+      const res = await axios.get("https://military-leave-catalog-backend-production.up.railway.app/api/personnel", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPersonnel(res.data);
