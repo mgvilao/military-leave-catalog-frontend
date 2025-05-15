@@ -36,3 +36,188 @@
     transform: rotate(360deg);
   }
 }
+
+table {
+  width: 100%;
+  border-collapse: separate; /* allows spacing */
+  border-spacing: 0 8px; /* row spacing */
+  background-color: #2f2f2f;
+  color: #f1f1f1;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 14px 16px; /* spacing inside cells */
+  border-bottom: 1px solid #4b6b44; /* horizontal lines between rows */
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background-color: #4b6b44;
+  color: #ffffff;
+  text-transform: uppercase;
+  border-bottom: 2px solid #5f8555;
+}
+
+tbody tr:hover {
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+
+tbody tr {
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.table-actions button {
+  background-color: #4b6b44;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.table-actions button:hover {
+  background-color: #5f8555;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #2f2f2f;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.personnel-form {
+  max-height: 400px;
+  overflow-y: auto;  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.personnel-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.personnel-form input {
+  padding: 8px;
+  margin-top: 4px;
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #5f8555;
+  border-radius: 4px;
+}
+
+/* Style the dropdown container */
+.personnel-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #1e1e1e;
+  color: white;
+  appearance: none; /* Remove default browser styling */
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Add hover and focus effects */
+.personnel-form select:hover {
+  border-color: #007bff;
+}
+
+.personnel-form select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Optional: Add a custom arrow for the dropdown */
+.personnel-form select::-ms-expand {
+  display: none; /* Hide the default arrow in IE */
+}
+
+.personnel-form select::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
+
+.submit-button {
+  background-color: #4b6b44;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #5f8555;
+}
+
+/* Container to hold all content */
+.container {
+  position: relative;
+  padding: 20px;
+  height: 100vh;
+}
+
+/* Top bar with the logout button */
+.top-bar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+}
