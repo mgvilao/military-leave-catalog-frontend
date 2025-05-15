@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3001/api/login", credentials);
+            const res = await axios.post("http://military-leave-catalog-backend-production.up.railway.app/api/login", credentials);
             onLogin(res.data.token);
         } catch (error) {
             console.error("Login failed:", error.response?.data?.message || error.message);
