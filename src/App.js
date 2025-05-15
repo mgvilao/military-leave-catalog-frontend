@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import './App.css';
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import PersonnelForm from './components/PersonnelForm';
 import PersonnelTable from './components/PersonnelTable';
 import axios from "axios";
@@ -13,6 +14,8 @@ const angolanRanks = [
 ];
 
 export default function MilitaryLeaveCatalog() {
+  const location = useLocation();
+  console.log("Current path:", location.pathname);
   const [token, setToken] = useState(() => localStorage.getItem("token")); // Load token from localStorage
   const [personnel, setPersonnel] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -66,55 +69,63 @@ export default function MilitaryLeaveCatalog() {
     return angolanRanks.indexOf(a.rank) - angolanRanks.indexOf(b.rank);
   });
 
-  if (!token) {
-    return <Login onLogin={handleLogin} />;
-  }
-
   return (
     <div className="p-6 space-y-6">
       <div className="container">
         <div className="top-bar">
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-          </button>
+          {token && (
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          )}
         </div>
         <Routes>
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="/login"
+            element={token ? <Navigate to="/" /> : <Login onLogin={handleLogin} />}
+          />
+          <Route
+            path="/signup"
+            element={token ? <Navigate to="/" /> : <Signup />}
+          />
           <Route
             path="/"
             element={
-              token ? <>
-                <PersonnelTable
-                  personnel={sortedPersonnel}
-                  onPrint={handlePrint}
-                  onExport={handleExport}
-                  onAddPersonnel={() => setShowModal(true)}
-                />
-                {showModal && (
-                  <div
-                    className="modal-overlay"
-                    onClick={(e) => {
-                      if (e.target.className === "modal-overlay") {
-                        setShowModal(false);
-                      }
-                    }}
-                  >
-                    <div className="modal-content">
-                      <h2>Adicionar</h2>
-                      <PersonnelForm
-                        onSubmit={(formData) => {
+              token ? (
+                <>
+                  <PersonnelTable
+                    personnel={sortedPersonnel}
+                    onPrint={handlePrint}
+                    onExport={handleExport}
+                    onAddPersonnel={() => setShowModal(true)}
+                  />
+                  {showModal && (
+                    <div
+                      className="modal-overlay"
+                      onClick={(e) => {
+                        if (e.target.className === "modal-overlay") {
                           setShowModal(false);
-                          fetchPersonnel();
-                        }}
-                        onClose={() => setShowModal(false)}
-                        token={token}
-                        fetchPersonnel={fetchPersonnel}
-                      />
+                        }
+                      }}
+                    >
+                      <div className="modal-content">
+                        <h2>Adicionar</h2>
+                        <PersonnelForm
+                          onSubmit={(formData) => {
+                            setShowModal(false);
+                            fetchPersonnel();
+                          }}
+                          onClose={() => setShowModal(false)}
+                          token={token}
+                          fetchPersonnel={fetchPersonnel}
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </>
-                : <Navigate to="/login" />
+                  )}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
           <Route path="*" element={<Navigate to="/login" />} />
