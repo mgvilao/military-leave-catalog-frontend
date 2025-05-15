@@ -4,7 +4,6 @@ import "./Signup.css";
 import axios from "axios";
 
 const Signup = () => {
-    console.log("Rendering signup...");
     const navigate = useNavigate();
     const [formData, setFormData] = useState({ username: "", password: "" });
     const [errorMessage, setErrorMessage] = useState("");
