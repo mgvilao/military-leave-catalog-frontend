@@ -14,8 +14,6 @@ const angolanRanks = [
 ];
 
 export default function MilitaryLeaveCatalog() {
-  const location = useLocation();
-  console.log("Current path:", location.pathname);
   const [token, setToken] = useState(() => localStorage.getItem("token")); // Load token from localStorage
   const [personnel, setPersonnel] = useState([]);
   const [showModal, setShowModal] = useState(false);
