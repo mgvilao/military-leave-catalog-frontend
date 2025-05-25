@@ -1,10 +1,16 @@
 import React from "react";
 
 export default function PersonnelTable({ personnel, onPrint, onExport, onAddPersonnel }) {
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }).format(date);
+  };
+
   return (
     <div>
       <div className="table-header">
-        <h1>Pessoal Militar em Licença Médica</h1>
+        <h1>Efetivos em Baixa Médica</h1>
         <div className="table-actions">
           <button onClick={onAddPersonnel}>Adicionar</button>
           <button onClick={onPrint}>Imprimir</button>
@@ -21,9 +27,9 @@ export default function PersonnelTable({ personnel, onPrint, onExport, onAddPers
             <th>Idade</th>
             <th>Unidade</th>
             <th>Diagnóstico</th>
-            <th>Hospital</th>
+            <th>Unidade Sanitária</th>
             <th>Tratamento</th>
-            <th>Período de Descanso</th>
+            <th>Período de Baixa</th>
             <th>Data de Início</th>
             <th>Data de Retorno</th>
           </tr>
@@ -40,8 +46,8 @@ export default function PersonnelTable({ personnel, onPrint, onExport, onAddPers
               <td>{person.hospital}</td>
               <td>{person.treatment}</td>
               <td>{person.restPeriod} dias</td>
-              <td>{person.restStart}</td>
-              <td>{person.estimatedReturn}</td>
+              <td>{formatDate(person.restStart)}</td>
+              <td>{formatDate(person.estimatedReturn)}</td>
             </tr>
           ))}
         </tbody>

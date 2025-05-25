@@ -128,16 +128,6 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.nip && <span className="error">{errors.nip}</span>}
       </label>
       <label>
-        Nome Completo:
-        <input
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
-        {errors.fullName && <span className="error">{errors.fullName}</span>}
-      </label>
-      <label>
         Posto:
         <select
           name="rank"
@@ -152,6 +142,16 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
           ))}
         </select>
         {errors.rank && <span className="error">{errors.rank}</span>}
+      </label>
+      <label>
+        Nome Completo:
+        <input
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+        {errors.fullName && <span className="error">{errors.fullName}</span>}
       </label>
       <label>
         Data de Nascimento:
@@ -185,7 +185,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.diagnosis && <span className="error">{errors.diagnosis}</span>}
       </label>
       <label>
-        Hospital:
+        Unidade Sanitária:
         <input
           name="hospital"
           value={formData.hospital}
@@ -205,7 +205,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.treatment && <span className="error">{errors.treatment}</span>}
       </label>
       <label>
-        Período de Licença (dias):
+        Período de Baixa (dias):
         <input
           type="number"
           name="restPeriod"
@@ -216,7 +216,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.restPeriod && <span className="error">{errors.restPeriod}</span>}
       </label>
       <label>
-        Início da Licença:
+        Início da Baixa:
         <input
           type="date"
           name="restStart"
