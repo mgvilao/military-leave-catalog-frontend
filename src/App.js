@@ -9,13 +9,11 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 
 const angolanRanks = [
-  "Almirante", "Vice-Almirante", "Contra-Almirante", "Comodoro", "Capitão de Mar e Guerra",
-  "Capitão de Fragata", "Capitão-Tenete", "Tenete de Marinha", "Segundo-Tenente", "Guarda-Marinha", "Subchefe Principal", "Subchefe de Primeira Classe", "Subchefe de Segunda Classe", "Sargento de Primeira Classe", "Sargento de Segunda Classe", "Marinheiro de Primeira Classe", "Marinheiro de Segunda Classe", "Marinheiro Recruta"
+  "Almirante", "Vice-Almirante", "Contra-Almirante", "Capitão de Mar e Guerra",
+  "Capitão de Fragata", "Capitão de Corveta", "Tenete de Navio", "Tenente de Fragata", "Tenente de Corveta", "Guarda-Marinha", "Cadete", "Sargento Maior", "Sargento Chefe", "Sargento Ajudante", "Primeiro Sargento", "Segundo Sargento", "Sub-Sargento", "Cabo", "Marinheiro", "Grumete", "Civil"
 ];
 
 export default function MilitaryLeaveCatalog() {
-  const location = useLocation();
-  console.log("Current path:", location.pathname);
   const [token, setToken] = useState(() => localStorage.getItem("token")); // Load token from localStorage
   const [personnel, setPersonnel] = useState([]);
   const [showModal, setShowModal] = useState(false);

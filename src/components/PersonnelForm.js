@@ -16,9 +16,10 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
   });
 
   const angolanRanks = [
-    "Almirante", "Vice-Almirante", "Contra-Almirante", "Comodoro", "Capitão de Mar e Guerra",
-    "Capitão de Fragata", "Capitão-Tenete", "Tenete de Marinha", "Segundo-Tenente", "Guarda-Marinha", "Subchefe Principal", "Subchefe de Primeira Classe", "Subchefe de Segunda Classe", "Sargento de Primeira Classe", "Sargento de Segunda Classe", "Marinheiro de Primeira Classe", "Marinheiro de Segunda Classe", "Marinheiro Recruta"
+    "Almirante", "Vice-Almirante", "Contra-Almirante", "Capitão de Mar e Guerra",
+    "Capitão de Fragata", "Capitão de Corveta", "Tenete de Navio", "Tenente de Fragata", "Tenente de Corveta", "Guarda-Marinha", "Cadete", "Sargento Maior", "Sargento Chefe", "Sargento Ajudante", "Primeiro Sargento", "Segundo Sargento", "Sub-Sargento", "Cabo", "Marinheiro", "Grumete", "Civil"
   ];
+  
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -127,16 +128,6 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.nip && <span className="error">{errors.nip}</span>}
       </label>
       <label>
-        Nome Completo:
-        <input
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
-        {errors.fullName && <span className="error">{errors.fullName}</span>}
-      </label>
-      <label>
         Posto:
         <select
           name="rank"
@@ -151,6 +142,16 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
           ))}
         </select>
         {errors.rank && <span className="error">{errors.rank}</span>}
+      </label>
+      <label>
+        Nome Completo:
+        <input
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+        {errors.fullName && <span className="error">{errors.fullName}</span>}
       </label>
       <label>
         Data de Nascimento:
@@ -184,7 +185,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.diagnosis && <span className="error">{errors.diagnosis}</span>}
       </label>
       <label>
-        Hospital:
+        Unidade Sanitária:
         <input
           name="hospital"
           value={formData.hospital}
@@ -204,7 +205,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.treatment && <span className="error">{errors.treatment}</span>}
       </label>
       <label>
-        Período de Licença (dias):
+        Período de Baixa (dias):
         <input
           type="number"
           name="restPeriod"
@@ -215,7 +216,7 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.restPeriod && <span className="error">{errors.restPeriod}</span>}
       </label>
       <label>
-        Início da Licença:
+        Início da Baixa:
         <input
           type="date"
           name="restStart"

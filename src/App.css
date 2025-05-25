@@ -14,13 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #1e90ff; /* Light blue */
   color: white;
 }
 
@@ -41,8 +35,8 @@ table {
   width: 100%;
   border-collapse: separate; /* allows spacing */
   border-spacing: 0 8px; /* row spacing */
-  background-color: #2f2f2f;
-  color: #f1f1f1;
+  background-color: #ffffff; /* White table background */
+  color: #1a1a1a; /* Dark text */
   margin-top: 20px;
 }
 
@@ -54,14 +48,18 @@ th, td {
 }
 
 th {
-  background-color: #4b6b44;
-  color: #ffffff;
+  background-color: #1e90ff; /* Light blue */
+  color: white;
   text-transform: uppercase;
   border-bottom: 2px solid #5f8555;
 }
 
+td {
+  color: #1a1a1a; /* Dark text */
+}
+
 tbody tr:hover {
-  background-color: #3a3a3a;
+  background-color: #f0f8ff; /* Very light blue on hover */
   cursor: pointer;
 }
 
@@ -83,7 +81,7 @@ tbody tr {
 }
 
 .table-actions button {
-  background-color: #4b6b44;
+  background-color: #1e90ff; /* Light blue */
   color: white;
   border: none;
   padding: 10px 16px;
@@ -94,7 +92,7 @@ tbody tr {
 }
 
 .table-actions button:hover {
-  background-color: #5f8555;
+  background-color: #4682b4; /* Slightly darker blue */
 }
 
 .modal-overlay {
@@ -111,11 +109,11 @@ tbody tr {
 }
 
 .modal-content {
-  background: #2f2f2f;
+  background: #f0f4f8; /* Light gray */
   padding: 30px;
   border-radius: 10px;
   width: 500px;
-  color: white;
+  color: #1a1a1a; /* Dark text */
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
@@ -136,8 +134,8 @@ tbody tr {
 .personnel-form input {
   padding: 8px;
   margin-top: 4px;
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #f0f4f8; /* Light gray background */
+  color: #1a1a1a; /* Dark text */
   border: 1px solid #5f8555;
   border-radius: 4px;
 }
@@ -147,11 +145,11 @@ tbody tr {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #5f8555; /* Match the border color of input fields */
   border-radius: 4px;
   font-size: 16px;
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #f0f4f8; /* Light gray background */
+  color: #1a1a1a; /* Dark text */
   appearance: none; /* Remove default browser styling */
   outline: none;
   transition: border-color 0.3s ease;
@@ -159,12 +157,12 @@ tbody tr {
 
 /* Add hover and focus effects */
 .personnel-form select:hover {
-  border-color: #007bff;
+  border-color: #1e90ff; /* Light blue border on hover */
 }
 
 .personnel-form select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #1e90ff; /* Light blue border on focus */
+  box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); /* Light blue glow */
 }
 
 /* Optional: Add a custom arrow for the dropdown */
@@ -180,17 +178,18 @@ tbody tr {
 }
 
 .submit-button {
-  background-color: #4b6b44;
+  background-color: #1e90ff; /* Light blue */
   color: white;
   padding: 10px 16px;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #5f8555;
+  background-color: #4682b4; /* Slightly darker blue */
 }
 
 /* Container to hold all content */
