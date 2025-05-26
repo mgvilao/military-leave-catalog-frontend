@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
+const PersonnelForm = ({ initialData, onSubmit, onClose, token, fetchPersonnel }) => {
   const [formData, setFormData] = useState({
     nip: "",
     fullName: "",
@@ -14,6 +14,13 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
     restPeriod: "",
     restStart: "",
   });
+
+  // Pre-fill the form when initialData changes
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const angolanRanks = [
     "Almirante", "Vice-Almirante", "Contra-Almirante", "Capitão de Mar e Guerra",
@@ -90,28 +97,27 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return; // Stop submission if validation fails
-    }
+    if (!validateForm()) return;
 
     try {
-      const newEntry = {
-        ...formData,
-        age: new Date().getFullYear() - new Date(formData.dob).getFullYear(), // Calculate age
-        estimatedReturn: new Date(
-          new Date(formData.restStart).getTime() + formData.restPeriod * 24 * 60 * 60 * 1000
-        ).toISOString().split("T")[0], // Calculate return date
-      };
-
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/personnel`, newEntry, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      if (initialData) {
+        // Update existing record
+        await axios.put(
+          `${process.env.REACT_APP_API_URL}/api/personnel/${initialData.id}`,
+          formData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      } else {
+        // Add new record
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/personnel`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
 
       fetchPersonnel(); // Refresh the personnel list
-      onSubmit(newEntry);
+      onSubmit();
     } catch (error) {
       console.error("Error submitting personnel form:", error.message);
-      alert(error.message);
     }
   };
 
@@ -227,7 +233,10 @@ const PersonnelForm = ({ onSubmit, onClose, token, fetchPersonnel }) => {
         {errors.restStart && <span className="error">{errors.restStart}</span>}
       </label>
       <button type="submit" className="submit-button">
-        Adicionar
+        {initialData ? "Atualizar" : "Adicionar"}
+      </button>
+      <button type="button" onClick={onClose} className="submit-button">
+        Cancelar
       </button>
     </form>
   );

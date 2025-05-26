@@ -1,6 +1,8 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-export default function PersonnelTable({ personnel, onPrint, onExport, onAddPersonnel }) {
+export default function PersonnelTable({ personnel, onEdit, onDelete, onAddPersonnel, onPrint, onExport, onWipeDatabase }) {
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -15,6 +17,7 @@ export default function PersonnelTable({ personnel, onPrint, onExport, onAddPers
           <button onClick={onAddPersonnel}>Adicionar</button>
           <button onClick={onPrint}>Imprimir</button>
           <button onClick={onExport}>Exportar CSV</button>
+          <button onClick={onWipeDatabase}>Limpar Tudo</button>
         </div>
       </div>
 
@@ -32,6 +35,7 @@ export default function PersonnelTable({ personnel, onPrint, onExport, onAddPers
             <th>Período de Baixa</th>
             <th>Data de Início</th>
             <th>Data de Retorno</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +52,20 @@ export default function PersonnelTable({ personnel, onPrint, onExport, onAddPers
               <td>{person.restPeriod} dias</td>
               <td>{formatDate(person.restStart)}</td>
               <td>{formatDate(person.estimatedReturn)}</td>
+              <td className="action-icons">
+                <FontAwesomeIcon
+                  icon={faEdit}
+                  className="action-icon edit-icon"
+                  onClick={() => onEdit(person)} // Pass the selected record to the onEdit function
+                  title="Editar"
+                />
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className="action-icon delete-icon"
+                  onClick={() => onDelete(person.id)}
+                  title="Excluir"
+                />
+              </td>
             </tr>
           ))}
         </tbody>

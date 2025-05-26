@@ -17,6 +17,7 @@ export default function MilitaryLeaveCatalog() {
   const [token, setToken] = useState(() => localStorage.getItem("token")); // Load token from localStorage
   const [personnel, setPersonnel] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [editingPersonnel, setEditingPersonnel] = useState(null); // State to hold the record being edited
 
   useEffect(() => {
     if (token) {
@@ -63,6 +64,37 @@ export default function MilitaryLeaveCatalog() {
     saveAs(blob, "military_leave_personnel.csv");
   };
 
+  const handleEdit = (person) => {
+    setEditingPersonnel(person); // Set the selected record as the one being edited
+    setShowModal(true); // Open the modal
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Tem certeza de que deseja excluir este registro?")) {
+      try {
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/personnel/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        fetchPersonnel(); // Refresh the personnel list
+      } catch (error) {
+        console.error("Error deleting personnel:", error.message);
+      }
+    }
+  };
+
+  const handleWipeDatabase = async () => {
+    if (window.confirm("Tem certeza de que deseja excluir todos os registros?")) {
+      try {
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/wipe-database`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        fetchPersonnel(); // Refresh the personnel list
+      } catch (error) {
+        console.error("Error wiping database:", error.message);
+      }
+    }
+  };
+
   const sortedPersonnel = [...personnel].sort((a, b) => {
     return angolanRanks.indexOf(a.rank) - angolanRanks.indexOf(b.rank);
   });
@@ -73,7 +105,7 @@ export default function MilitaryLeaveCatalog() {
         <div className="top-bar">
           {token && (
             <button className="logout-button" onClick={handleLogout}>
-              Logout
+              Sair
             </button>
           )}
         </div>
@@ -96,6 +128,9 @@ export default function MilitaryLeaveCatalog() {
                     onPrint={handlePrint}
                     onExport={handleExport}
                     onAddPersonnel={() => setShowModal(true)}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    onWipeDatabase={handleWipeDatabase}
                   />
                   {showModal && (
                     <div
@@ -107,10 +142,12 @@ export default function MilitaryLeaveCatalog() {
                       }}
                     >
                       <div className="modal-content">
-                        <h2>Adicionar</h2>
+                        <h2>{editingPersonnel ? "Editar" : "Adicionar"}</h2>
                         <PersonnelForm
+                          initialData={editingPersonnel} // Pass the selected record as initial data
                           onSubmit={(formData) => {
                             setShowModal(false);
+                            setEditingPersonnel(null);
                             fetchPersonnel();
                           }}
                           onClose={() => setShowModal(false)}

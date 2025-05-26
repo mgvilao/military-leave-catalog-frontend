@@ -40,11 +40,14 @@ table {
   margin-top: 20px;
 }
 
+/* General table cell styles */
 th, td {
-  padding: 14px 16px; /* spacing inside cells */
-  border-bottom: 1px solid #4b6b44; /* horizontal lines between rows */
+  padding: 14px 16px; /* Consistent padding for all cells */
+  border-bottom: 1px solid #4b6b44; /* Consistent border style */
   text-align: left;
   font-size: 14px;
+  vertical-align: middle; /* Ensure vertical alignment is consistent */
+  box-sizing: border-box; /* Include padding and border in height calculation */
 }
 
 th {
@@ -93,6 +96,22 @@ tbody tr {
 
 .table-actions button:hover {
   background-color: #4682b4; /* Slightly darker blue */
+}
+
+/* Style for the wipe database button */
+.table-actions button:last-child {
+  background-color: #d9534f; /* Match the red color of the logout button */
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table-actions button:last-child:hover {
+  background-color: #c9302c; /* Slightly darker red on hover */
 }
 
 .modal-overlay {
@@ -219,4 +238,35 @@ tbody tr {
 
 .logout-button:hover {
   background-color: #c9302c;
+}
+
+/* Style for the last column */
+.last-column {
+  display: flex;
+  justify-content: space-between; /* Space between text and icons */
+  align-items: center; /* Vertically center content */
+  width: 100%; /* Ensure the column spans the full width */
+}
+
+/* Style for action icons */
+.action-icon {
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.edit-icon {
+  color: #1e90ff; /* Light blue for edit */
+}
+
+.edit-icon:hover {
+  color: #4682b4; /* Slightly darker blue on hover */
+}
+
+.delete-icon {
+  color: #d9534f; /* Red for delete */
+}
+
+.delete-icon:hover {
+  color: #c9302c; /* Slightly darker red on hover */
 }
